@@ -2,9 +2,9 @@
 <html>
 <head>
 
+<meta charset="utf-8">
 <title>"My First HTML Form"</title>
 
-<meta charset="utf-8">
 </head>
 
 <body>
@@ -21,11 +21,11 @@
 <form method="POST">
 	<p>
 		<label for="name">Username</label>
-		<input id="name" name="username" tyoe="text">
+		<input id="name" name="username" tyoe="text" placeholder="Username here" required>
 	</p>
 	<p>
 		<label for="pass">Passwords</label>
-		<input id="pass" name="password" type="password">
+		<input id="pass" name="password" type="password" placeholder="Password">
 	</p>
 	<p>
 		<input type="submit">
