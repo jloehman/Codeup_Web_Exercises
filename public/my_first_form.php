@@ -35,26 +35,26 @@
 
 <form method="POST" action="/form.php">
 	<p>
-		<label for="name">To</label>
-		<input id="name" name="name" type="text" placeholder="to" required>
+		<label for="email_to">To</label>
+		<input id="email_to" name="email" type="email" placeholder="to" required>
 	</p>
 	<p>
-		<label for"name">From</label>
-		<input id="name" name="name" type="text" placeholder="from" required>
+		<label for"email_from">From</label>
+		<input id="email_from" name="email-from" type="email" placeholder="from" required>
 	</p>
 	<p>
-		<label for="name">Subject</label>
-		<input id="name" name="name" type="text" placeholder="subject">
+		<label for="email_subject">Subject</label>
+		<input id="email_subject" name="email_subject" type="text" placeholder="subject">
 	<p>
 <!-- 		<input id="email" name="email" type="text" placeholder="email">
- -->	</p>
+ --></p>
 	<!-- <p>
 		<label for="pass">Password</label>
 		<input id="pass" name="password" type="password" placeholder="Password">
 	</p> -->
 	<p>
 		<!-- <label for="body">Text Body</label> -->
-		<textarea name="post_body" rows="5" cols="80" id="body"></textarea>
+		<textarea name="email_body" rows="5" cols="80" id="body"></textarea>
 	</p>
 	<p>
 <!-- 		<input type="submit" name="submit">
