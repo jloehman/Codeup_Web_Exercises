@@ -77,13 +77,47 @@
 <label>No <input name="signup" type="radio" value="no"></label>
 	</p>
 	<p>
-		What is your favorite cookie?<br><br>
-<label>giant<input type="checkbox" name="panda[]" value="giant"></label>
-<label>tiny<input type="checkbox" name="panda[]" value="tiny"></label>
-<label>chunky<input type="checkbox" name="panda[]" value="chunky"></label>
+		What are your favorite cookie(s)?<br><br>
+
+<label>giant<input type="checkbox" id="o1" name="cookie[]" value="giant"></label>
+<br>
+<label>tiny<input type="checkbox" id="o2" name="cookie[]" value="tiny"></label>
+<br>
+<label>chunky<input type="checkbox" id="o3" name="cookie[]" value="chunky"></label>
+<br>
+	</p>
+	
+	<p>
+		<label for="option">What have you used in Codeup?</label>
+		<br>
+		<select id="option" name="option[]" multiple>
+		    <option value="php">php</option>
+		    <option value="html">html</option>
+		    <option value="java">java</option>
+</select>
 	</p>
 
-	
+
+	<p>
+		<button type="submit">submit</button>
+	</p>
+</form>
+
+<form>
+
+	<h1>Select Testing</h1>
+
+Are you a web dev?
+<br><br>
+		<label for="webdev">Select: </label>
+		<select id="webdev" name="webdev">
+			<option selected value="1">Yes</option>
+			<option value="0">No</option>
+		</select>
+
+				<button type="submit">submit</button>
+
+
 </form>
 </body>
 </html>
