@@ -57,9 +57,32 @@
 		<textarea name="email_body" rows="5" cols="80" id="body"></textarea>
 	</p>
 	<p>
+<!-- 	Would you like to save a copy of your email?
+ -->	<label>Would you like to save a copy? <input type="checkbox" name="option[]" checked></label>
+	</p>
+	<p>
 <!-- 		<input type="submit" name="submit">
  -->		<button type="submit">send</button>
 	</p>
+
+<h1>Multiple choice test</h1>
+	<p>
+<label for="Q1">Q1?</label><br><br>
+<label>Yes <input name="signup" type="radio" value="yes"></label>
+<label>No <input name="signup" type="radio" value="no"</label>
+	</p>
+	<p>
+<label for="Q2">Q2?</label><br><br>
+<label>Yes <input name="signup" type="radio" value="yes"></label>
+<label>No <input name="signup" type="radio" value="no"></label>
+	</p>
+	<p>
+		What is your favorite cookie?<br><br>
+<label>giant<input type="checkbox" name="panda[]" value="giant"></label>
+<label>tiny<input type="checkbox" name="panda[]" value="tiny"></label>
+<label>chunky<input type="checkbox" name="panda[]" value="chunky"></label>
+	</p>
+
 	
 </form>
 </body>
