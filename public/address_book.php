@@ -9,27 +9,26 @@ $address_book = [
     ['Home', '18910 Marbach Ln', 'San Antonio', 'TX', '78266'],
     ['Codeup', '112 E Pecan St', 'San Antonio', 'TX', '78205']
 ];
+$new_address = [];
 
-
-$filename = "data/address_book.csv";
+$filename = "address_book.csv";
 
 // Write CSV function
 
-function write_csv($bigArray, $filename) {
+function write_csv($address_book, $filename) {
     if (is_writable($filename)) {
-        $handle = fopen($filename, "w");
-        foreach ($bigArray as $fields) {
+        $handle = fopen($filename, 'w');
+        foreach ($address_book as $fields) {
             fputcsv($handle, $fields);
         }
         fclose($handle);
     }
 }
 
-$new_address = [];
-
 // Error check
 
 if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['zip'])) {
+
 
     $new_address['name'] = $_POST['name'];
     $new_address['address'] = $_POST['address'];
@@ -39,7 +38,7 @@ if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['city']
     $new_address['phone'] = $_POST['phone'];
 
     array_push($address_book, $new_address);
-    write_csv($address_book, $filename);
+   	write_csv($address_book, $filename);
     
 } else {
 
@@ -80,33 +79,33 @@ if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['city']
             <h1>Add contact info:</h1>
     <form method="POST" action="/address_book.php">
         <p>
-            <label for="contact">name</label>
-            <input id="contact" name="contact" type="text" placeholder="name">
+            <label for="name">name</label>
+            <input id="name" name="name" type="text" placeholder="name">
         </p>
         <p>
-            <label for="contact">address</label>
-            <input id="contact" name="contact" type="text" placeholder="address">
+            <label for="address">address</label>
+            <input id="address" name="address" type="text" placeholder="address">
         </p>
          <p>
-            <label for="contact">city</label>
-            <input id="contact" name="contact" type="text" placeholder="city">
+            <label for="city">city</label>
+            <input id="city" name="city" type="text" placeholder="city">
         </p>
         
         <p>
-            <label for="contact">state</label>
-            <input id="contact" name="contact" type="text" placeholder="state">
+            <label for="state">state</label>
+            <input id="state" name="state" type="text" placeholder="state">
         </p>
         
         <p>
-            <label for="contact">zip</label>
-            <input id="contact" name="contact" type="text" placeholder="zip">
+            <label for="zip">zip</label>
+            <input id="zip" name="zip" type="text" placeholder="zip">
         </p>
         
    
  
         <p>
-            <label for="contact">phone</label>
-            <input id="contact" name="contact" type="text" placeholder="phone">
+            <label for="phone">phone</label>
+            <input id="phone" name="phone" type="text" placeholder="phone">
         </p>
         
    		<input type='submit' value="Add contact">
