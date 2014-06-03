@@ -2,28 +2,28 @@
 
 
 // you will want to display your entries at the top of the page
-$address_book = [
-    ['The White House', '1600 Pennsylvania Ave.', 'Washington', 'DC', '20500'],
-    ['Marvel Comics', 'P.O. Box 1527', 'Long Island City', 'NY', '11101'],
-    ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901'],
-    ['Home', '18910 Marbach Ln', 'San Antonio', 'TX', '78266'],
-    ['Codeup', '112 E Pecan St', 'San Antonio', 'TX', '78205']
-];
+
 $new_address = [];
 
 $filename = "address_book.csv";
 
+$address_book = read_file($filename);
+
+
+// $handle = fopen($filename, 'r');
+
+
+
 // Write CSV function
 
 function write_csv($address_book, $filename) {
-    if (is_writable($filename)) {
         $handle = fopen($filename, 'w');
         foreach ($address_book as $fields) {
             fputcsv($handle, $fields);
         }
         fclose($handle);
     }
-}
+
 
 // Error check
 
@@ -44,9 +44,41 @@ if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['city']
 
     foreach ($_POST as $key => $value) {
         if (empty($value)) {
-            echo "<h1>" . ucfirst($key) .  " is empty.</h1>";
+            echo "<p><center><h2><font color='red'>" . ucfirst($key) .  " is empty.</h1></center></p>";
         }
     }
+}
+// if (!empty($_POST['phone'])) {
+//     array_push($new_address, $_POST['phone']);
+//     write_csv($filename, $new_address);
+// }
+//Create a function to read the file and display all entries, just like the TODO list.
+
+function read_file($filename){
+	$handle = fopen($filename, 'r');
+	$address_book = [];
+
+	while (!feof($handle)){
+		$row = fgetcsv($handle);
+		if(is_array($row)) {
+		$address_book[] = $row;
+		}
+	}
+
+	fclose($handle);
+	return $address_book;
+}
+
+
+
+
+// check if we need to remove an item from the list
+if (isset($_GET['removeindex'])) {
+    $removeindex = $_GET['removeindex'];
+    unset($address_book[$removeindex]);
+    write_csv($address_book, $filename);
+    // exit(0);
+
 }
 
 ?>
@@ -67,15 +99,18 @@ if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['city']
                     <th>Zip</th>
                     <th>Phone</th>
                 </tr>
-                <? foreach ($address_book as $fields) : ?>
+                <? foreach ($address_book as $key => $fields) : ?>
                 <tr>
                     <? foreach ($fields as $value): ?>
-                        <td><?= $value; ?></td>
+                        <td><?= htmlspecialchars(strip_tags($value)); ?></td>
+               
                     <? endforeach; ?>
+
+                    <td><?= "<a href='?removeindex=" . $key . "'>";?> delete </a></td>
                 </tr>
                 <? endforeach; ?>
             </table>
-
+         
             <h1>Add contact info:</h1>
     <form method="POST" action="/address_book.php">
         <p>
@@ -101,8 +136,6 @@ if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['city']
             <input id="zip" name="zip" type="text" placeholder="zip">
         </p>
         
-   
- 
         <p>
             <label for="phone">phone</label>
             <input id="phone" name="phone" type="text" placeholder="phone">
