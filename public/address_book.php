@@ -90,7 +90,7 @@ if (isset($_GET['removeindex'])) {
     </head>
     <body>
         <h1>My address book:</h1>
-<table>
+<table border = "1">
                 <tr>
                     <th>Name</th>
                     <th>Address</th>
@@ -110,7 +110,7 @@ if (isset($_GET['removeindex'])) {
                 </tr>
                 <? endforeach; ?>
             </table>
-         
+
             <h1>Add contact info:</h1>
     <form method="POST" action="/address_book.php">
         <p>
