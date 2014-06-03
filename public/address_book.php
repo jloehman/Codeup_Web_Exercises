@@ -10,10 +10,6 @@ $filename = "address_book.csv";
 $address_book = read_file($filename);
 
 
-// $handle = fopen($filename, 'r');
-
-
-
 // Write CSV function
 
 function write_csv($address_book, $filename) {
@@ -48,10 +44,7 @@ if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['city']
         }
     }
 }
-// if (!empty($_POST['phone'])) {
-//     array_push($new_address, $_POST['phone']);
-//     write_csv($filename, $new_address);
-// }
+
 //Create a function to read the file and display all entries, just like the TODO list.
 
 function read_file($filename){
