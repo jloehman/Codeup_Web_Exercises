@@ -3,26 +3,61 @@
 
 // you will want to display your entries at the top of the page
 
-$new_address = [];
+class AddressDataStore {
 
-$filename = "address_book.csv";
+    public $filename = 'address_book.csv';
 
-$address_book = read_file($filename);
 
+    public function read_address_book() 
+    {
+        $handle = fopen($this->filename, 'r');
+		$address_book = [];
+
+		while (!feof($handle)){
+			$row = fgetcsv($handle);
+			if(is_array($row)) {
+				$address_book[] = $row;
+			}
+		}
+
+		fclose($handle);
+		return $address_book;
+	}
+
+
+
+	function write_address_book($address_book)
+    {
+        $handle = fopen($this->filename, 'w');
+        foreach ($address_book as $fields) {
+        	fputcsv($handle, $fields);
+        }
+        	fclose($handle);
+    }
+}
+
+$ads = new AddressDataStore();
 
 // Write CSV function
 
-function write_csv($address_book, $filename) {
-        $handle = fopen($filename, 'w');
-        foreach ($address_book as $fields) {
-            fputcsv($handle, $fields);
-        }
-        fclose($handle);
-    }
+// function write_csv($address_book, $filename) {
+//         $handle = fopen($filename, 'w');
+//         foreach ($address_book as $fields) {
+//             fputcsv($handle, $fields);
+//         }
+//         fclose($handle);
+//     }
+
+$ads->filename;
+
+$address_book = [];
+
+$address_book = $ads->read_address_book();
 
 
 // Error check
 
+$new_address = [];
 if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['zip'])) {
 
 
@@ -31,10 +66,13 @@ if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['city']
     $new_address['city'] = $_POST['city'];
     $new_address['state'] = $_POST['state'];
     $new_address['zip'] = $_POST['zip'];
+    if(empty($_POST['phone'])){
+    	$new_address['phone'] = "xxx-xxx-xxxx";
+    }else{
     $new_address['phone'] = $_POST['phone'];
-
+}
     array_push($address_book, $new_address);
-   	write_csv($address_book, $filename);
+   	$ads->write_address_book($address_book);
     
 } else {
 
@@ -47,20 +85,20 @@ if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['city']
 
 //Create a function to read the file and display all entries, just like the TODO list.
 
-function read_file($filename){
-	$handle = fopen($filename, 'r');
-	$address_book = [];
+// function read_file($filename){
+// 	$handle = fopen($filename, 'r');
+// 	$address_book = [];
 
-	while (!feof($handle)){
-		$row = fgetcsv($handle);
-		if(is_array($row)) {
-		$address_book[] = $row;
-		}
-	}
+// 	while (!feof($handle)){
+// 		$row = fgetcsv($handle);
+// 		if(is_array($row)) {
+// 		$address_book[] = $row;
+// 		}
+// 	}
 
-	fclose($handle);
-	return $address_book;
-}
+// 	fclose($handle);
+// 	return $address_book;
+// }
 
 
 
@@ -69,7 +107,7 @@ function read_file($filename){
 if (isset($_GET['removeindex'])) {
     $removeindex = $_GET['removeindex'];
     unset($address_book[$removeindex]);
-    write_csv($address_book, $filename);
+    $ads->write_address_book($address_book);
     // exit(0);
 
 }
