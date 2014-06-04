@@ -45,22 +45,16 @@ class AddressDataStore {
         	fclose($handle);
     	}
 	}
+	function __destruct($ads = '') 
+    {
+        echo "Goodbye {$this->name}\n";
+    }
 
 
 $ads = new AddressDataStore("address_book.csv");
 
 // below was before construct
 // $ads = new AddressDataStore();
-
-// Write CSV function
-
-// function write_csv($address_book, $filename) {
-//         $handle = fopen($filename, 'w');
-//         foreach ($address_book as $fields) {
-//             fputcsv($handle, $fields);
-//         }
-//         fclose($handle);
-//     }
 
 $ads->filename;
 
@@ -123,36 +117,14 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
         write_file_save($filename, $todos_array);
     }
 }
-
-//Create a function to read the file and display all entries, just like the TODO list.
-
-// function read_file($filename){
-// 	$handle = fopen($filename, 'r');
-// 	$address_book = [];
-
-// 	while (!feof($handle)){
-// 		$row = fgetcsv($handle);
-// 		if(is_array($row)) {
-// 		$address_book[] = $row;
-// 		}
-// 	}
-
-// 	fclose($handle);
-// 	return $address_book;
-// }
-
-
-
-
 // check if we need to remove an item from the list
 if (isset($_GET['removeindex'])) {
     $removeindex = $_GET['removeindex'];
     unset($address_book[$removeindex]);
     $ads->write_address_book($address_book);
     // exit(0);
-
 }
-
+unset($ads);
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -225,10 +197,6 @@ if (isset($_GET['removeindex'])) {
 		        <input type="submit" value="Upload">
 		    </p>
 </form>
-
-
     </form>
-
-
         </body>
         </html>
