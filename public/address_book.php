@@ -216,7 +216,7 @@ if (isset($_GET['removeindex'])) {
    		<input type='submit' value="Add contact">
    		<h1>Upload File</h1>
 
-		<form method="POST" enctype="multipart/form-data">
+		<form method="POST" enctype="multipart/form-data" action="address_book.php">
 		    <p>
 		        <label for="file1">File to upload: </label>
 		        <input type="file" id="file1" name="file1">
