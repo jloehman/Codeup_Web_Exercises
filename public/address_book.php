@@ -1,7 +1,8 @@
 <?php
 
 // include Conversation class file
-include('address_data_store.php');
+//require once best of both worlds
+require_once('address_data_store.php');
 
 // you will want to display your entries at the top of the page
 
