@@ -3,8 +3,6 @@
 
 <head>
 	<title>Math objects</title>
-</head>
-<body>
 	<button id ="button me">Test</button>
 <script>
 // create a circle object
@@ -14,16 +12,15 @@
 // }
 var circle = {
     radius: 3,
-    getArea: function ()) {
+    getArea: function () {
         // todo: finish this method
-        var area = Math.PI * Math.pow(this.radius,2);
-		return area;
-
+        return area = Math.PI * Math.pow(this.radius,2);
+		// return area;
     },
     logInfo: function (round) {
     	 var area = (round) ? Math.round(this.getArea()) : this.getArea();
         // todo: complete this method. if round is true, round the result to the nearest integer.
-        console.log('Area of a circle with radius: ' + this.radius + ', is: ');
+        console.log('Area of a circle with radius: ' + this.radius + ', is: ' + area);
     }
 };
 
@@ -40,5 +37,8 @@ circle.radius = 5;
 circle.logInfo(false);
 circle.logInfo(true);
 </script>
+</head>
+<body>
+
 </body>
 </html>
