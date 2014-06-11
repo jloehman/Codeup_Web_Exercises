@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>date objects</title>
+	<button id ="button me">You are here</button>
+	<script src="/js/moment.js"></script>
+	<script>
+
+var now = moment();
+// todo:
+// Create an array of months for printing dates without Moment.js.
+var months = (['01','Jan'],['02','Feb'],['03','Mar'], ['04', 'Apr'], ['05', 'May'],['06', 'Jun'], ['07', 'Jul'], ['08', 'Aug'], ['09', 'Sep'], ['10', 'Oct'], ['11', 'Nov'], ['12', 'Dec']);
+// todo:
+// Create the date corresponding to your birthday using the JavaScript Date object.
+
+// todo:
+var jsBirthday = new Date("June 11, 1985 21:56:00");
+// Log your birthday in the format: January 1, 2014 using the JavaScript Date object.
+// See link below for methods needed:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#Getter
+console.log('Here is my birthday using vanilla js: ' + jsBirthday);
+
+// create the date corresponding to your birthday using Moment.js.
+// moment().format("Jun 11 85");
+//right now
+
+
+// todo:
+// Log your birthday in the format: January 1, 2014 using Moment.js.
+// console.log('Here is my birthday using Moment.js: ' + moment);
+
+var birthday = moment("6-11-1985", "MM-DD-YYYY");
+console.log('Here is my birthday using Moment.js: ' + birthday);
+//birthday using years ago console.log('Here is my irtdhay using Moment.js:' + birthday.fromNow);
+
+	</script>
+</head>
+<body>
+</body>
+</html>
