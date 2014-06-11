@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Math objects</title>
+</head>
+<body>
+	<button id ="button me">Test</button>
+<script>
+// create a circle object
+// Returns a random integer between min and max.
+// function getRandomInt(min, max) {
+//   return Math.floor(Math.random() * (max - min + 1) + min);
+// }
+var circle = {
+    radius: 3,
+    getArea: function ()) {
+        // todo: finish this method
+        var area = Math.PI * Math.pow(this.radius,2);
+		return area;
+
+    },
+    logInfo: function (round) {
+    	 var area = (round) ? Math.round(this.getArea()) : this.getArea();
+        // todo: complete this method. if round is true, round the result to the nearest integer.
+        console.log('Area of a circle with radius: ' + this.radius + ', is: ');
+    }
+};
+
+// log info about the circle
+circle.logInfo(false);
+circle.logInfo(true);
+
+// todo:
+// Change the radius of the circle to 5.
+
+circle.radius = 5;
+
+// log info about the circle
+circle.logInfo(false);
+circle.logInfo(true);
+</script>
+</body>
+</html>
