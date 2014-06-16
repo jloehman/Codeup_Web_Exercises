@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Whack-a-gopher</title>
+	<script src="/js/jquery.js"></script>
+	<style>
+
+.mole {
+	display: none;
+}
+
+.container {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	background-color: transparent;
+	background-size: ;
+	color: #0f0;
+	font-size: 18pt;
+
+
+}
+
+#board {
+	width: 606px;
+	height: 606px;
+	z-index: 1;
+	margin: auto;
+	cursor:crosshair;
+	position: auto;
+
+}
+
+.hole {
+	width: 200px;
+	height: 200px;
+	border: 1px solid #0f0;
+	float: left;
+	margin: center;
+}
+
+img {
+	position: auto;
+	z-index: 2
+}
+
+body {
+	font-family: 'Maven Pro', sans-serif;
+	background-color: transparent;
+	/*cursor:hand;
+	cursor:pointer;*/
+	background-image: url(img/Augusta.jpg);
+
+}
+
+p {
+	color: #ff0;
+}
+
+	</style>
+</head>
+<body>
+
+	<div class="container">
+		<h1>Whack-a-gopher</h1>
+		<p id="end">Do you know what the Lama says? Gunga galunga... gunga, gunga-lagunga.</p>
+
+		<button id="start" style="red">Whack Me</button>
+
+
+		<p2>
+		<tr><td>score: <span id="score">0</span></td></tr> 
+		<tr><td>time: <span id="timer">30</span></td></tr>
+		<p2>
+
+		<div id="board">
+			<div>
+<!-- 				<img id="mole" style="display:none;cursor:pointer" src="img/newgopher.jpg">
+ -->			</div>
+			<div class="hole">
+				<img class="mole" src="img/newgopher.png">
+			</div>
+			<div class="hole">
+				<img class="mole" src="img/newgopher.png">
+			</div>
+			<div class="hole">
+				<img class="mole" src="img/newgopher.png">
+			</div>
+			<div class="hole">
+				<img class="mole" src="img/newgopher.png">
+			</div>
+			<div class="hole">
+				<img class="mole" src="img/newgopher.png">
+			</div>
+			<div class="hole">
+				<img class="mole" src="img/newgopher.png">
+			</div>
+			<div class="hole">
+				<img class="mole" src="img/newgopher.png">
+			</div>
+			<div class="hole">
+				<img class="mole" src="img/newgopher.png">
+			</div>
+			<div class="hole">
+				<img class="mole" src="img/newgopher.png">
+			</div>
+			</div>
+	<script>
+
+// document.getElementById('board').style.backgroundImage="url(img/Augusta_no_10.png)";
+//Create your HTML markup and CSS to position your holes. These will be element that your mole will pop in and out of.
+
+//Randomly select a hole on page load and change its background color to red. You may want to nest another element, and use an animated method like .fadeIn().
+// $('.mole').fadeIn(1000);
+
+// 	$(this).fadeOut('slow/400/fast');
+
+// select all moles 
+var moles = $('.mole');
+
+//set score
+var score = 0;
+
+//set time
+var time = 30;
+
+	// if moles are displayed on page load
+	// $('.mole').fadeIn(1000);
+
+	// hide end of game
+	$('#end').hide();
+
+
+	// gets random img
+	// fades in and out 
+	// hides if mole is clicked
+
+	// startWhacking when button clicked
+	$('#start').click(startWhack);
+
+	// function startWhack() {
+	// 	setInterval(setMole, 1000);
+
+//	}
+
+	// start count down
+	function countdown() {
+		$('#start').hide();
+		$('#end').hide();
+		time = 30;
+		var interval = setInterval(function() {
+			if (time > 0) {
+				--time;
+				$('#timer').html(time);
+			} else {
+				$('#end').show();
+				alert( 'Gameover' );
+				// clearInterval();
+				window.location.reload();
+
+	}
+		}, 1000);
+	}
+
+	//start playing
+	function startWhack() {
+		score = 0;
+		$('#score').html(score);
+		// set interval to run setMole		
+		var interval = setInterval(setMole, 2000);
+			setTimeout(function() {
+			clearInterval(interval);
+		}, 30000);
+		countdown();
+
+	}
+
+	//fade random moles
+	function setMole() {
+		var mole = moles[Math.floor(Math.random()*moles.length)];
+		// console.log(mole);
+			$(mole).fadeIn(500).delay(200).fadeOut(500);
+			// $(mole).fadeOut(1000);
+			// console.log(mole);
+
+	}
+	// hides if mole is clicked
+		$('.mole').click(function() {
+			$(this).hide();
+			++score;
+			$('#score').html(score);
+			// console.log(click);
+
+
+	});
+	</script>
+</body>
+</html>
