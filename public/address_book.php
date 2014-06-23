@@ -2,33 +2,41 @@
 
 // include Conversation class file
 //require once best of both worlds
-require_once('address_data_store.php');
+require_once('classes/filestore.php');
 
 // you will want to display your entries at the top of the page
 
-// $address_book = [];
-// $errorMessage = '';
+
+$ads = new Filestore('address_book.csv');
+
+$address_book = $ads->read();
+$errorMessage = '';
 
 
-	// function __destruct($ads = '') 
- //    {
- //        echo "Goodbye {$this->name}\n";
- //    }
+// function __destruct($ads = '') 
+//    {
+//        echo "Goodbye {$this->name}\n";
+//    }
 
 
-$ads = new AddressDataStore("address_book.csv");
+
+// $address_book = $ads->address_book_csv();
+
+
 
 // below was before construct
 // $ads = new AddressDataStore();
 
-$ads->filename;
+// $ads->filename;
+// var_dump($ads->filename);
 
-$address_book = [];
-
-$address_book = $ads->read_address_book();
+// $address_book = $ads->read_address_book();
 
 
 // Error check
+
+
+
 
 $new_address = [];
 if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['zip'])) {
@@ -45,7 +53,7 @@ if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['city']
     $new_address['phone'] = $_POST['phone'];
 }
     array_push($address_book, $new_address);
-   	$ads->write_address_book($address_book);
+   	$ads->write($address_book);
     
 } else {
 
@@ -78,7 +86,7 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
         $address_uploaded = $ups->read_address_book();
         // var_dump($address_uploaded);
         $address_book = array_merge($todos_array, $todos_uploaded);
-        //var_dump($address_book);
+        // var_dump($address_book);
         write_file_save($filename, $todos_array);
     }
 }
@@ -86,73 +94,77 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
 if (isset($_GET['removeindex'])) {
     $removeindex = $_GET['removeindex'];
     unset($address_book[$removeindex]);
-    $ads->write_address_book($address_book);
+    $ads->write($address_book);
     // exit(0);
 }
+
 // unset($ads);
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/csv; charset=UTF-8"/>
-        <title></title>
+        <title>Address Book</title>
+        <link rel="stylesheet" href ="/css/addres_book.css">
     </head>
-    <body>
+    <body class="div">
         <h1>My address book:</h1>
-<table border = "1">
-                <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Zip</th>
-                    <th>Phone</th>
-                </tr>
-                <? foreach ($address_book as $key => $fields) : ?>
-                <tr>
-                    <? foreach ($fields as $value): ?>
-                        <td><?= htmlspecialchars(strip_tags($value)); ?></td>
-               
-                    <? endforeach; ?>
-
-                    <td><?= "<a href='?removeindex=" . $key . "'>";?> delete </a></td>
-                </tr>
+        <table border = "1">
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Phone</th>
+            </tr>
+            <? foreach ($address_book as $key => $fields): ?>
+            <tr>
+                <? if (!isset($fields['5'])) : ?>
+                    <? array_push($fields, ''); ?>
+                <? endif ?>
+                <? foreach ($fields as $value): ?>
+                    <td><?= htmlspecialchars(strip_tags($value)); ?></td>
                 <? endforeach; ?>
-            </table>
+
+                <td><?= "<a href='?removeindex=" . $key . "'>";?> delete </a></td>
+            </tr>
+            <? endforeach; ?>
+        </table>
 
             <h1>Add contact info:</h1>
-    <form method="POST" action="address_book.php">
-        <p>
-            <label for="name">name</label>
-            <input id="name" name="name" type="text" placeholder="name">
-        </p>
-        <p>
-            <label for="address">address</label>
-            <input id="address" name="address" type="text" placeholder="address">
-        </p>
-         <p>
-            <label for="city">city</label>
-            <input id="city" name="city" type="text" placeholder="city">
-        </p>
-        
-        <p>
-            <label for="state">state</label>
-            <input id="state" name="state" type="text" placeholder="state">
-        </p>
-        
-        <p>
-            <label for="zip">zip</label>
-            <input id="zip" name="zip" type="text" placeholder="zip">
-        </p>
-        
-        <p>
-            <label for="phone">phone</label>
-            <input id="phone" name="phone" type="text" placeholder="optional">
-        </p>
-        
-   		<input type='submit' value="Add contact">
+        <form method="POST" action="address_book.php">
+            <p>
+                <label for="name">name</label>
+                <input id="name" name="name" type="text" placeholder="name">
+            </p>
+            <p>
+                <label for="address">address</label>
+                <input id="address" name="address" type="text" placeholder="address">
+            </p>
+             <p>
+                <label for="city">city</label>
+                <input id="city" name="city" type="text" placeholder="city">
+            </p>
+            
+            <p>
+                <label for="state">state</label>
+                <input id="state" name="state" type="text" placeholder="state">
+            </p>
+            
+            <p>
+                <label for="zip">zip</label>
+                <input id="zip" name="zip" type="text" placeholder="zip">
+            </p>
+            
+            <p>
+                <label for="phone">phone</label>
+                <input id="phone" name="phone" type="text" placeholder="optional">
+            </p>
+            
+       		<input type='submit' value="Add contact">
+        </form>
    		<h1>Upload File</h1>
-
 		<form method="POST" enctype="multipart/form-data" action="address_book.php">
 		    <p>
 		        <label for="file1">File to upload: </label>
@@ -161,7 +173,10 @@ if (isset($_GET['removeindex'])) {
 		    <p>
 		        <input type="submit" value="Upload">
 		    </p>
-</form>
-    </form>
+        </form>
         </body>
         </html>
+
+
+
+
